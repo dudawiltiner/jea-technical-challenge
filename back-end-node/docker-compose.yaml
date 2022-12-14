@@ -1,0 +1,36 @@
+# Definindo a versão do docker-compose que será utilizada
+version: '3.5'
+
+# Definindo os serviços/containers
+services:
+  api1:
+    container_name: node_api
+    build: . # será armazenado em cash
+    volumes: # criar volumes para poder editar códigos
+      - .:/api
+      - /api/node_modules
+    ports: 
+      - ${API_PORT}:3000 # bind da porta
+    depends_on:
+      - db
+    env_file:
+      - '.env'
+    environment:
+    # sobrescrever essas variáveis para conseguirem
+    # se conectar na sua rede virtual isolada
+      DB_HOST: postgres-db # o nome do container do banco de dados
+      DB_PORT: 5432
+
+  db:
+    container_name: postgres-db
+    image: postgres:13
+    ports: 
+      - ${DB_PORT}:5432 # porta obrigatória
+    env_file:
+      - '.env'
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+  
+
