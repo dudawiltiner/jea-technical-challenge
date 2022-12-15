@@ -1,8 +1,11 @@
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AuthGuard } from 'src/auth.guard';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { LoginUser } from './user.type';
 
 @Resolver()
 export class UserResolver {
@@ -15,8 +18,7 @@ export class UserResolver {
   }
 
   @Query(() => [User])
-  async users(@Context() context): Promise<User[]> {
-    console.log(context.req.headers);
+  async users(): Promise<User[]> {
     const users = await this.userService.findAllUsers();
     return users;
   }
@@ -27,21 +29,18 @@ export class UserResolver {
     return user;
   }
 
-  @Mutation(() => User)
+  @Mutation(() => LoginUser)
   async loginUser(
     @Args('username') username: string,
     @Args('password') password: string,
-  ): Promise<User> {
+  ): Promise<LoginUser> {
     const user = await this.userService.loginUser(username, password);
-
-    if (!user) {
-      return user;
-    }
-
-    return this.userService.createToken(user);
+    const token = this.userService.createToken(user);
+    return { name: user.name, username: user.username, token };
   }
 
   @Mutation(() => User)
+  @UseGuards(new AuthGuard())
   async updateUser(
     @Args('id') id: string,
     @Args('data') data: UpdateUserInput,
@@ -50,7 +49,8 @@ export class UserResolver {
     return user;
   }
 
-  @Mutation(() => User)
+  @Mutation(() => Boolean)
+  @UseGuards(new AuthGuard())
   async deleteUser(@Args('id') id: string): Promise<boolean> {
     const deleted = await this.userService.deleteUser(id);
     return deleted;

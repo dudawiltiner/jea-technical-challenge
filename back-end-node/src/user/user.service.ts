@@ -47,6 +47,9 @@ export class UserService {
 
   async loginUser(username: string, password: string): Promise<User> {
     const user = await this.userRepository.findOneBy({ username, password });
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
     return user;
   }
 
@@ -72,9 +75,7 @@ export class UserService {
   }
 
   async deleteUser(id: string): Promise<boolean> {
-    const user = await this.findUserById(id);
-
-    const deleted = await this.userRepository.delete(user);
+    const deleted = await this.userRepository.delete({ id });
 
     if (deleted) {
       return true;

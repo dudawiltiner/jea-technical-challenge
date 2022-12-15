@@ -9,6 +9,12 @@ type User {
   username: String!
 }
 
+type LoginUser {
+  name: String!
+  username: String!
+  token: String!
+}
+
 type FoundProject {
   id: ID!
   title: String!
@@ -36,9 +42,9 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserInput!): User!
-  loginUser(username: String!, password: String!): User!
+  loginUser(username: String!, password: String!): LoginUser!
   updateUser(id: String!, data: UpdateUserInput!): User!
-  deleteUser(id: String!): User!
+  deleteUser(id: String!): Boolean!
   createProject(data: CreateProjectInput!): FoundProject!
   updateProject(id: String!, data: UpdateProjectInput!): FoundProject!
   deleteProject(id: String!): Boolean!
