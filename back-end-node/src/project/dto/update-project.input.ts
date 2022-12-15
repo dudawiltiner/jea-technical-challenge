@@ -1,29 +1,34 @@
 import { InputType } from '@nestjs/graphql';
 import {
+  IsDate,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   Matches,
-  MaxLength,
-  MinLength,
 } from 'class-validator';
 
 @InputType()
-export class UpdateUserInput {
+export class UpdateProjectInput {
   @IsString()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   @IsOptional()
-  name?: string;
+  title?: string;
 
   @IsString()
-  @MinLength(4)
-  @MaxLength(20)
+  @Matches(/^[0-9]{8}$/)
+  @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
+  zip_code?: string;
+
+  @IsNumber()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   @IsOptional()
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'Senha muito fraca',
-  })
-  password?: string;
+  cost?: number;
+
+  @IsDate()
+  @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
+  @IsOptional()
+  deadline?: Date;
 
   @IsString()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })

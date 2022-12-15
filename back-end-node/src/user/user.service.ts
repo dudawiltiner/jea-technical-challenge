@@ -7,7 +7,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import * as jwt from 'jsonwebtoken';
 import { User } from './user.entity';
+
+const jwtConfig = {
+  expiresIn: '1d',
+  algorithm: 'HS256',
+};
 
 @Injectable()
 export class UserService {
@@ -15,6 +21,14 @@ export class UserService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
+
+  createToken({ id, username }: User) {
+    return jwt.sign(
+      { data: { id, username } },
+      process.env.SECRET_KEY,
+      jwtConfig,
+    );
+  }
 
   async findAllUsers(): Promise<User[]> {
     const users = await this.userRepository.find();
@@ -28,6 +42,11 @@ export class UserService {
       throw new NotFoundException('Usuário não econtrado');
     }
 
+    return user;
+  }
+
+  async loginUser(username: string, password: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ username, password });
     return user;
   }
 

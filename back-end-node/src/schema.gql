@@ -5,26 +5,69 @@
 type User {
   id: ID!
   name: String!
-  email: String!
+  password: String!
+  username: String!
 }
+
+type FoundProject {
+  id: ID!
+  title: String!
+  zip_code: String!
+  city: String!
+  cost: Float!
+  done: Boolean!
+  deadline: DateTime!
+  username: String!
+  create_at: DateTime!
+  update_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Query {
   user(id: String!): User!
   users: [User!]!
+  project(id: String!): FoundProject!
+  projects: [FoundProject!]!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): User!
+  loginUser(username: String!, password: String!): User!
   updateUser(id: String!, data: UpdateUserInput!): User!
   deleteUser(id: String!): User!
+  createProject(data: CreateProjectInput!): FoundProject!
+  updateProject(id: String!, data: UpdateProjectInput!): FoundProject!
+  deleteProject(id: String!): Boolean!
 }
 
 input CreateUserInput {
   name: String!
-  email: String!
+  password: String!
+  username: String!
 }
 
 input UpdateUserInput {
   name: String
-  email: String
+  password: String
+  username: String
+}
+
+input CreateProjectInput {
+  title: String!
+  zip_code: String!
+  cost: Float!
+  deadline: DateTime!
+  username: String!
+}
+
+input UpdateProjectInput {
+  title: String
+  zip_code: String
+  cost: Float
+  deadline: DateTime
+  username: String
 }

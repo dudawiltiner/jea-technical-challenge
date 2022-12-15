@@ -16,6 +16,7 @@ export class CreateUserInput {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
+  @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'Senha muito fraca',
   })
