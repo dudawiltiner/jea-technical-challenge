@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
+  },
+  "dependencies": {
+    "@material-ui/icons": "^4.11.3"
+  }
+}
