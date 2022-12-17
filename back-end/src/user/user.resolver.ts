@@ -12,6 +12,7 @@ export class UserResolver {
   constructor(private userService: UserService) {}
 
   @Query(() => User)
+  @UseGuards(new AuthGuard())
   async user(@Args('id') id: string): Promise<User> {
     const oneUser = await this.userService.findUserById(id);
     return oneUser;

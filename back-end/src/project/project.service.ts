@@ -20,14 +20,12 @@ export class ProjectService {
 
   async findAllProjects(): Promise<FoundProject[]> {
     const projects = await this.projectRepository.find();
-    console.log(projects);
     const list = [];
     let count = 0;
     while (count <= 3) {
       const project = projects[count];
-      console.log(project);
       const adress = await fetchFindCep(project.zip_code);
-      const newProject = { ...project, city: adress.logradouro };
+      const newProject = { ...project, city: `${adress.city}/${adress.state}` };
       list.push(newProject);
       count += 1;
     }
@@ -43,7 +41,7 @@ export class ProjectService {
     }
 
     const adress = await fetchFindCep(project.zip_code);
-    const newProject = { ...project, city: adress.logradouro };
+    const newProject = { ...project, city: `${adress.city}/${adress.state}` };
     return newProject;
   }
 
@@ -53,9 +51,7 @@ export class ProjectService {
     });
 
     if (existedProject) {
-      const adress = await fetchFindCep(existedProject.zip_code);
-      const newProject = { ...existedProject, city: adress.logradouro };
-      return newProject;
+      throw new InternalServerErrorException('Projeto já existe');
     }
 
     const project = this.projectRepository.create(data);
@@ -66,7 +62,10 @@ export class ProjectService {
     }
 
     const adress = await fetchFindCep(project.zip_code);
-    const newProject = { ...projectSaved, city: adress.logradouro };
+    const newProject = {
+      ...projectSaved,
+      city: `${adress.city}/${adress.state}`,
+    };
     return newProject;
   }
 
@@ -84,7 +83,10 @@ export class ProjectService {
     });
 
     const adress = await fetchFindCep(project.zip_code);
-    const newProject = { ...projectUpdated, city: adress.logradouro };
+    const newProject = {
+      ...projectUpdated,
+      city: `${adress.city}/${adress.state}`,
+    };
     return newProject;
   }
 

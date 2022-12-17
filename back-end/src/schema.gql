@@ -45,7 +45,7 @@ type Mutation {
   loginUser(username: String!, password: String!): LoginUser!
   updateUser(id: String!, data: UpdateUserInput!): User!
   deleteUser(id: String!): Boolean!
-  createProject(data: CreateProjectInput!): FoundProject!
+  createProject(data: CreateProjectWithHeaderInput!): FoundProject!
   updateProject(id: String!, data: UpdateProjectInput!): FoundProject!
   deleteProject(id: String!): Boolean!
 }
@@ -62,12 +62,11 @@ input UpdateUserInput {
   username: String
 }
 
-input CreateProjectInput {
+input CreateProjectWithHeaderInput {
   title: String!
   zip_code: String!
   cost: Float!
   deadline: DateTime!
-  username: String!
 }
 
 input UpdateProjectInput {

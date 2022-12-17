@@ -54,6 +54,13 @@ export class UserService {
   }
 
   async createUser(data: CreateUserInput): Promise<User> {
+    const existedProject = await this.userRepository.findOneBy({
+      username: data.username,
+    });
+
+    if (existedProject) {
+      throw new InternalServerErrorException('Usuário já existe');
+    }
     const user = this.userRepository.create(data);
     const userSaved = await this.userRepository.save(user);
 

@@ -3,18 +3,31 @@ version: '3.5'
 
 # Definindo os serviços/containers
 services:
-  api1:
-    container_name: node-api
-    build: . # será armazenado em cash
+  app:
+    container_name: react-app
+    build: front-end/ # será armazenado em cash
     volumes: # criar volumes para poder editar códigos
-      - .:/api
+      - ./front-end:/app
+      - /app/node_modules
+    ports: 
+      - ${APP_PORT}:${APP_PORT} # bind da porta
+    depends_on:
+      - api
+    env_file:
+      - './front-end/.env'
+
+  api:
+    container_name: node-api
+    build: back-end/ # será armazenado em cash
+    volumes: # criar volumes para poder editar códigos
+      - ./back-end:/api
       - /api/node_modules
     ports: 
       - ${API_PORT}:${API_PORT} # bind da porta
     depends_on:
       - db
     env_file:
-      - '.env'
+      - './back-end/.env'
     environment:
     # sobrescrever essas variáveis para conseguirem
     # se conectar na sua rede virtual isolada

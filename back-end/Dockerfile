@@ -9,7 +9,7 @@ ENV PATH /api/node_modules/.bin:$PATH
 
 # LAYER IV - COPIANDO apenas essa pasta para dentro da nossa imagem
 # pois apenas ela é necessária para instalar as nossas dependências
-COPY package.json /api/package.json
+COPY package.json .
 
 # LAYER V - RODANDO na build as instalação das dependências
 RUN npm install
