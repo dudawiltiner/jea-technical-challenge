@@ -7,7 +7,7 @@ Esse desafio foi proposto pela time de recrutamento da empresa J&A, em que foram
 
 ---
 
-## Sumário
+## 📌 Sumário
 
 - [Contexto do *Case*](#contexto-do-case)
   - [Requisitos técnicos](#requisitos-técnicos)
@@ -112,11 +112,11 @@ Vamos lá!
    docker-compose up --build
 ```
 
-## Usando a plataforma
+## ⚡ Usando a plataforma
 
 Após cada um dos passos a seguir, haverá um exemplo de como cada página pode ser usada, caso tenha dificuldades e o exemplo não seja suficiente, não hesite em me contatar em _eduardawiltiner@gmail.com_.
 
-### ⚡ Primeiro Acesso
+###  Primeiro Acesso
 
 Acessando a plataforma neste [link](http://localhost:3000/), você irá encontrar a tela de **Login**, em que será redirecionado(a) e poderá realizar o cadastro na tela após clicar no link.
 
