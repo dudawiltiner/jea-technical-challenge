@@ -1,12 +1,12 @@
-import { Project } from "../../store";
+import { Project } from '../../store'
 
 export interface ResponseCreateProject {
-  createProject: Project;
+  createProject: Project
 }
 
 export interface ProjectInput {
-  title: string,
-  zip_code: string,
-  deadline: string,
+  title: string
+  zip_code: string
+  deadline: string
   cost: number
 }

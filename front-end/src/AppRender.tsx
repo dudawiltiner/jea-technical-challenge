@@ -21,7 +21,7 @@ export const themeOptions = (isDarkMode: boolean) => {
   }
 }
 
-const client = new QueryClient();
+const client = new QueryClient()
 
 function AppRender() {
   const [isDarkMode] = useAtom(isDarkModeAt)

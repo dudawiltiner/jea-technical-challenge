@@ -7,6 +7,9 @@ export const fetchFindCep: (value: string) => Promise<Response> = async (
 ) => {
   const response = await axios.get(
     `${API_VIACEP}${`${cep.slice(0, 5)}-${cep.slice(5, 8)}`}.json`,
+    {
+      headers: { 'Accept-Encoding': 'gzip,deflate,compress' },
+    },
   );
 
   const data = response.data;

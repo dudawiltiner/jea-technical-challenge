@@ -15,17 +15,17 @@ export const projectsList = atom<Project[]>([])
 // Project
 export const projectAt = atom<Project>({
   id: 0,
-  title: "",
-  username: "",
-  city: "",
-  zip_code: "",
+  title: '',
+  username: '',
+  city: '',
+  zip_code: '',
   cost: 0,
   done: false,
-  deadline: ""
+  deadline: ''
 })
 
 // Show the projects
-export const showAt = atom("allprojects")
+export const showAt = atom('allprojects')
 
 // Controlando Snacks
 export const openSnackSuccessEdit = atom(false)

@@ -48,7 +48,6 @@ export default function Actions({ done, data }: ActionsProps) {
   }
 
   function editProject() {
-    console.log(data.id)
     setProject({ ...data })
     setOpen(true)
   }

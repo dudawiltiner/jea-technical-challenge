@@ -22,10 +22,18 @@ export default function HomeModel() {
       <CreateProjectForms />
       <EditProjectForms />
       <CreationFAB />
-      <SnackbarPersonalized type={"success"} open={openCreate} handleClose={() => setOpenCreate(false)} >
+      <SnackbarPersonalized
+        type={'success'}
+        open={openCreate}
+        handleClose={() => setOpenCreate(false)}
+      >
         Projeto criado com sucesso!
       </SnackbarPersonalized>
-      <SnackbarPersonalized type={"success"} open={openEdit} handleClose={() => setOpenEdit(false)} >
+      <SnackbarPersonalized
+        type={'success'}
+        open={openEdit}
+        handleClose={() => setOpenEdit(false)}
+      >
         Projeto editado com sucesso!
       </SnackbarPersonalized>
     </Container>

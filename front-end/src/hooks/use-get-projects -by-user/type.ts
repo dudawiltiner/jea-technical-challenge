@@ -1,5 +1,5 @@
-import { Project } from '../../store';
+import { Project } from '../../store'
 
 export interface ResponseGetProjects {
-  projectsByUser: Project[] | never[];
+  projectsByUser: Project[] | never[]
 }

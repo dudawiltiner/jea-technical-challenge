@@ -12,7 +12,7 @@ export default function Forms() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [openSnackError, setOpenSnackError] = useState(false)
-  const [stop, setStop] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
   const [cookies, setCookie] = useCookies()
   const navigate = useNavigate()
 
@@ -30,18 +30,12 @@ export default function Forms() {
   const onSubmit = (data: any) => {
     setUsername(data.username)
     setPassword(data.password)
-    setStop(false)
+    setShowLoading(true)
   }
 
   const { data, isLoading, error } = useLogin(username, password)
 
-  if(error && !stop) {
-    setOpenSnackError(true)
-    setStop(true)
-  }
-
   useEffect(() => {
-    console.log(data)
     if (!isLoading && data && data.loginUser?.token !== '') {
       let dateLater = new Date()
       dateLater.setMinutes(dateLater.getMinutes() + 15)
@@ -49,6 +43,15 @@ export default function Forms() {
       setCookie('username', data.loginUser.username, { expires: dateLater })
       navigate('/')
     }
+
+    if (error && !isLoading && showLoading) {
+      setOpenSnackError(true)
+    }
+
+    if (!isLoading) {
+      setShowLoading(false)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading])
 
@@ -67,8 +70,12 @@ export default function Forms() {
       sx={{ mt: 3 }}
     >
       <FieldsContainer control={control} errors={errors} />
-      <ButtonAndLink />
-      <SnackbarPersonalized type={"error"} open={openSnackError} handleClose={() => setOpenSnackError(false)} >
+      <ButtonAndLink isLoading={showLoading && isLoading} />
+      <SnackbarPersonalized
+        type={'error'}
+        open={openSnackError}
+        handleClose={() => setOpenSnackError(false)}
+      >
         Algo de errado aconteceu. Confira se os dados preenchidos.
       </SnackbarPersonalized>
     </Box>

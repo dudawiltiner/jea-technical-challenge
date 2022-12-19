@@ -6,7 +6,12 @@ import {
   TitleForms
 } from '../../../molecules/Home/EditProjectForms'
 import { useAtom } from 'jotai'
-import { openEditioModal, openSnackSuccessEdit, projectAt, projectsList } from '../../../../store'
+import {
+  openEditioModal,
+  openSnackSuccessEdit,
+  projectAt,
+  projectsList
+} from '../../../../store'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import dayjs from 'dayjs'
@@ -27,8 +32,8 @@ export default function EditProjectForms() {
   })
   const [openSnackError, setOpenSnackError] = useState(false)
   const [, setOpenEdit] = useAtom(openSnackSuccessEdit)
+  const [showLoading, setShowLoading] = useState(false)
   const [cookies] = useCookies()
-  console.log('project', project)
 
   const {
     handleSubmit,
@@ -45,7 +50,7 @@ export default function EditProjectForms() {
   })
 
   useEffect(() => {
-    let defaults ={
+    let defaults = {
       title: project.title,
       zip_code: project.zip_code,
       cost: project.cost,
@@ -55,34 +60,35 @@ export default function EditProjectForms() {
   }, [project, reset])
 
   const onSubmit = async (data: any) => {
+    setShowLoading(true)
     try {
-    const response = await fetchFindCep(data.zip_code)
+      const response = await fetchFindCep(data.zip_code)
 
-    setDataInput({
-      ...data,
-      deadline: data.deadline.$d,
-      cost: parseInt(data.cost)
-    })
-    let list = projects.filter((el) => el.id !== project.id)
-    list.push({
-      ...data,
-      id: project.id,
-      done: project.done,
-      username: project.username,
-      deadline: data.deadline.$d,
-      cost: parseInt(data.cost),
-      city: `${response.city}/${response.state}`
-    })
-    list.sort((a, b) => a.id - b.id)
-    setProjects([...list])
+      setDataInput({
+        ...data,
+        deadline: data.deadline.$d,
+        cost: parseInt(data.cost)
+      })
+      let list = projects.filter((el) => el.id !== project.id)
+      list.push({
+        ...data,
+        id: project.id,
+        done: project.done,
+        username: project.username,
+        deadline: data.deadline.$d,
+        cost: parseInt(data.cost),
+        city: `${response.city}/${response.state}`
+      })
+      list.sort((a, b) => a.id - b.id)
+      setProjects([...list])
 
-    setOpen(false)
+      setOpen(false)
     } catch {
       setOpenSnackError(true)
     }
   }
 
-  const {data, isLoading, error} = useUpdateProject(
+  const { data, isLoading, error } = useUpdateProject(
     dataInput,
     project.id,
     project.done,
@@ -90,15 +96,19 @@ export default function EditProjectForms() {
     cookies.token
   )
 
-  if(error) {
-    setOpenSnackError(true)
-  }
-
   useEffect(() => {
-    if(data && data?.updateProject.id > 0 && !isLoading) {
+    if (data && data?.updateProject.id > 0 && !isLoading) {
       setOpenEdit(true)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (error && !isLoading && showLoading) {
+      setOpenSnackError(true)
+    }
+
+    if (!isLoading) {
+      setShowLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading])
 
   return (
@@ -115,7 +125,11 @@ export default function EditProjectForms() {
         </DialogContent>
         <ButtonsContainer />
       </Box>
-      <SnackbarPersonalized type={"error"} open={openSnackError} handleClose={() => setOpenSnackError(false)} >
+      <SnackbarPersonalized
+        type={'error'}
+        open={openSnackError}
+        handleClose={() => setOpenSnackError(false)}
+      >
         Algo de errado aconteceu. Confira se os dados alterados.
       </SnackbarPersonalized>
     </Dialog>

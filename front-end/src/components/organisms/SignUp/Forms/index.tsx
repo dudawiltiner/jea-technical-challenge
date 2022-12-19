@@ -14,8 +14,8 @@ export default function Forms() {
     password: ''
   })
   const [openSnackError, setOpenSnackError] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
   const [cookies] = useCookies()
-  const [stop, setStop] = useState(false)
   const navigate = useNavigate()
 
   const {
@@ -41,19 +41,22 @@ export default function Forms() {
     setUser({
       ...data
     })
-    setStop(false)
+    setShowLoading(true)
   }
 
   const { data, isLoading, error } = useCreateUser(user)
 
-  if(error && !stop) {
-    setOpenSnackError(true)
-    setStop(true)
-  }
-
   useEffect(() => {
     if (!isLoading && data?.createUser.username !== '') {
       navigate('/login')
+    }
+
+    if (error && !isLoading && showLoading) {
+      setOpenSnackError(true)
+    }
+
+    if (!isLoading) {
+      setShowLoading(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading])
@@ -66,9 +69,14 @@ export default function Forms() {
       sx={{ mt: 3 }}
     >
       <FieldsContainer control={control} errors={errors} />
-      <ButtonAndLink />
-      <SnackbarPersonalized type={"error"} open={openSnackError} handleClose={() => setOpenSnackError(false)} >
-        Algo de errado aconteceu. Confira se os dados preenchidos e se o usuário ainda não existe.
+      <ButtonAndLink isLoading={showLoading && isLoading} />
+      <SnackbarPersonalized
+        type={'error'}
+        open={openSnackError}
+        handleClose={() => setOpenSnackError(false)}
+      >
+        Algo de errado aconteceu. Confira se os dados preenchidos e se o usuário
+        ainda não existe.
       </SnackbarPersonalized>
     </Box>
   )

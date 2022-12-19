@@ -2,10 +2,14 @@ import { Grid } from '@mui/material'
 import React from 'react'
 import { ButtonSubmit, LinkForm } from '../../../../atoms/Sign/Forms'
 
-export default function ButtonAndLink() {
+interface ButtonAndLinkProps {
+  isLoading: boolean
+}
+
+export default function ButtonAndLink({ isLoading }: ButtonAndLinkProps) {
   return (
     <div>
-      <ButtonSubmit>CADASTRAR</ButtonSubmit>
+      <ButtonSubmit isLoading={isLoading}>CADASTRAR</ButtonSubmit>
       <Grid container justifyContent="flex-end">
         <Grid item>
           <LinkForm link="/login">

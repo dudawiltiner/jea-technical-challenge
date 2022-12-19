@@ -1,6 +1,6 @@
 export interface UserInput {
-  name: string,
-  username: string,
+  name: string
+  username: string
   password: string
 }
 

@@ -39,7 +39,6 @@ export class ProjectResolver {
     @Args('data') data: CreateProjectWithHeaderInput,
     @Context() context,
   ): Promise<FoundProject> {
-    console.log(context.req.headers.username);
     const project = await this.projectService.createProject({
       ...data,
       username: context.req.headers.username,

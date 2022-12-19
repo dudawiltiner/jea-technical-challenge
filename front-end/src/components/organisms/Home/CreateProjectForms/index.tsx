@@ -6,7 +6,11 @@ import {
   TitleForms
 } from '../../../molecules/Home/CreateProjectForms'
 import { useAtom } from 'jotai'
-import { openCreatioModal, openSnackSuccessCreate, projectsList } from '../../../../store'
+import {
+  openCreatioModal,
+  openSnackSuccessCreate,
+  projectsList
+} from '../../../../store'
 import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import dayjs from 'dayjs'
@@ -24,6 +28,7 @@ export default function CreateProjectForms() {
     cost: 0,
     deadline: dayjs(new Date()).date.toString()
   })
+  const [showLoading, setShowLoading] = useState(false)
   const [openSnackError, setOpenSnackError] = useState(false)
   const [cookies] = useCookies()
   const [, setOpenCreate] = useAtom(openSnackSuccessCreate)
@@ -42,47 +47,50 @@ export default function CreateProjectForms() {
   })
 
   const onSubmit = async (data: any) => {
+    setShowLoading(true)
     try {
-      const response = await fetchFindCep(data.zip_code)
+      await fetchFindCep(data.zip_code)
 
       setDataInput({
         ...data,
         deadline: data.deadline.$d,
         cost: parseInt(data.cost)
       })
-
-      const projectsValues = projects
-      setProjects([
-        ...projectsValues,
-        {
-          ...data,
-          username: cookies.username,
-          deadline: data.deadline.$d,
-          cost: parseInt(data.cost),
-          city: `${response.city}/${response.state}`
-        }
-        
-      ])
-
-      setOpen(false)
     } catch {
       setOpenSnackError(true)
     }
   }
 
-  const {data, isLoading, error} = useCreateProject(dataInput, cookies.username, cookies.token)
-
-  if(error) {
-    setOpenSnackError(true)
-  }
+  const { data, isLoading, error } = useCreateProject(
+    dataInput,
+    cookies.username,
+    cookies.token
+  )
 
   useEffect(() => {
-    if(data && data?.createProject.id > 0 && !isLoading) {
+    if (data && data?.createProject.id > 0 && !isLoading && showLoading) {
       setOpenCreate(true)
+      let list = projects
+      list.push({
+        ...data.createProject,
+        zip_code: dataInput.zip_code,
+        cost: dataInput.cost
+      })
+      setProjects([...list])
+
+      setOpen(false)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (error && !isLoading && showLoading) {
+      setOpenSnackError(true)
+    }
+
+    if (!isLoading) {
+      setShowLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading])
-  
+
   return (
     <Dialog
       sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
@@ -99,7 +107,11 @@ export default function CreateProjectForms() {
         </DialogContent>
         <ButtonsContainer />
       </Box>
-      <SnackbarPersonalized type={"error"} open={openSnackError} handleClose={() => setOpenSnackError(false)} >
+      <SnackbarPersonalized
+        type={'error'}
+        open={openSnackError}
+        handleClose={() => setOpenSnackError(false)}
+      >
         Algo de errado aconteceu. Confira se os dados preenchidos.
       </SnackbarPersonalized>
     </Dialog>

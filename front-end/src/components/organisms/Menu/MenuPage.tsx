@@ -17,7 +17,7 @@ const pages = ['Sair']
 
 function MenuPage() {
   const location = useLocation()
-  const [cookies,, removeCookie] = useCookies()
+  const [cookies, , removeCookie] = useCookies()
   const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAt)
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [show, setShow] = React.useState(true)
@@ -127,7 +127,10 @@ function MenuPage() {
             />
 
             <IconButton sx={{ p: 0 }}>
-              <Avatar alt={cookies.username} src="/static/images/avatar/2.jpg" />
+              <Avatar
+                alt={cookies.username}
+                src="/static/images/avatar/2.jpg"
+              />
             </IconButton>
           </Box>
         </Toolbar>
