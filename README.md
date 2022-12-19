@@ -53,7 +53,7 @@ Abaixo estão os requisitos técnicos e as funcionalidades que a solução deve 
 
 A solução do desafio foi separarada em duas partes: front-end e back-end, cada em sua respectiva pasta com as seguintes tecnologias principais:
 
-- Front-End
+### Front-End
 [React](https://reactjs.org/)<br>
 [Typescript](https://www.typescriptlang.org/)<br>
 [ReactHooksForms](hhttps://react-hook-form.com/)<br>
@@ -61,17 +61,17 @@ A solução do desafio foi separarada em duas partes: front-end e back-end, cada
 [Jotai](https://jotai.org/)<br>
 [ReactQuery](https://react-query-v3.tanstack.com/)<br>
 
-- Back-End
+### Back-End
 [Nest](https://nestjs.com/)<br>
 [Nodejs](https://nodejs.org/)<br>
 [JWT](https://jwt.io/)<br>
 [ClassValidator](https://github.com/typestack/class-validator)<br>
 [GraphQL](https://graphql.org/)<br>
 
-- Banco de Dados
+### Banco de Dados
 [PostgreSQL](https://www.postgresql.org/)<br>
 
-- Criação do Ambiente
+### Criação do Ambiente
 [Docker](https://www.docker.com/)<br>
 
 
@@ -129,7 +129,7 @@ Após cada um dos passos a seguir, haverá um exemplo de como cada página pode 
 Acessando a plataforma neste [link](http://localhost:3000/), você irá encontrar a tela de **Login**, em que será redirecionado(a) e poderá realizar o cadastro na tela após clicar no link.
 
 <div align="center">
-  <img src="./gifs/login.gif" margin="10px" width="700" alt="login"/>
+  <img src="./gifs/primeiroacessoecadastro.gif" margin="10px" width="700" alt="login"/>
 </div>
 
 ### Login
