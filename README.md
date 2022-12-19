@@ -13,6 +13,7 @@ Esse desafio foi proposto pela time de recrutamento da empresa J&A, em que foram
   - [Requisitos técnicos](#requisitos-técnicos)
   - [Funcionalidades](#funcionalidades)
 - [Entregáveis](#entregáveis)
+- [Uso do projeto localmente](#uso-do-projeto-localmente)
 - [Usando a plataforma](#usando-a-plataforma)
   - [Primeiro Acesso](#primeiro-acesso)
   - [Criando uma tarefa](#criando-uma-tarefa)
@@ -53,14 +54,63 @@ Abaixo estão os requisitos técnicos e as funcionalidades que a solução deve 
 
 A solução do desafio foi separarada em duas partes: front-end e back-end, cada em sua respectiva pasta com as seguintes tecnologias:
 
+- Front-End
+[React](https://reactjs.org/)<br>
+[Next](https://nextjs.org/)<br>
+[Vercel](https://vercel.com/)<br>
+[ESLint](https://eslint.org/)<br>
+[Tailwind.css](https://tailwindcss.com/)<br>
 
+- Back-End
 
+- Banco de Dados
+
+- Criação do Ambiente
 
 Gostaria de informar que me autodesafiei muito nesse desafio e quis desenvolve-lo com tecnologias em alta no mercado, as quais eu nunca tinha trabalhado antes como: Postgre, GraphQL, Rect Hooks Forms, Nestjs e Docker. Por estar atuando a muitos meses no front-end imaginei que iria sentir muita dificuldade na instalação, configuraçao e manipulação do Postgre, um SGBD que nunca havia trabalhado, mas utilizando o Docker consegui criar uma ambiente com tudo que eu precisava sem se quer ter que fazer as configurações manuais que levam tempo para os desenvolvedores inciarem de fato a programação dos seu apps no projeto. Acredito que o ponto alto foi de fato o Docker. Além de claro, o GraphQL que me ajudou a criar com um único end-point a API com tudo que eu precisava. 
 
-
-
 ---
+
+## Uso do projeto localmente
+
+Para facilitar o processo de rodar o projeto localmente. Recomendo seguir o passo a passo descrito a abaixo, após instalar o Docker e Docker Compose em seu notebook usando a própria documentação da ferramenta para o seu sistema operacional, em poucos passos você vai perceber que o projeto estará rodando em seu notebook com poucos comandos. É sensacional! Mas se preferir em cada pasta há um readme gerado pelas ferramentas pricipais que explica como manipular e instalar as dependências de cada pasta.
+
+Vamos lá!
+
+### Clone do repositório
+
+1. Abra o terminal e crie um diretório no local de sua preferência com o comando **mkdir**:
+```javascript
+  mkdir desafio-jea
+```
+
+2. Entre no diretório que acabou de criar e depois clone o projeto:
+```javascript
+  cd desafio-jea
+  git clone https://github.com/dudawiltiner/jea-technical-challenge.git
+```
+
+### Instalação das dependências
+
+3. Entre no diretório criado após a clonagem do repositório.
+```javascript
+  cd jea-technical-challenge
+```
+
+4. Garanta de remover todas os containers, volumes e imagens que você possui.
+```javascript
+   docker-compose down -v --rmi all
+```
+
+5. Limpar tudo que ainda tiver.
+```javascript
+   docker system prune -af
+```
+
+6. Instale todas as dependências e rode a aplicação, usando o CLI **docker-compose**.
+```javascript
+   docker-compose up --build
+```
 
 ## Usando a plataforma
 
@@ -157,6 +207,7 @@ Esse desafio foi proposto pela [Trybe](https://www.betrybe.com/), em que foram r
   - [Requisitos técnicos](#requisitos-técnicos)
   - [Funcionalidades](#funcionalidades)
 - [Entregáveis](#entregáveis)
+- [](#entregáveis)
 - [Usando a plataforma](#usando-a-plataforma)
   - [Primeiro Acesso](#primeiro-acesso)
   - [Criando uma tarefa](#criando-uma-tarefa)
@@ -167,7 +218,6 @@ Esse desafio foi proposto pela [Trybe](https://www.betrybe.com/), em que foram r
   - [Digitando a URL de forma errada](#digitando-a-url-de-forma-errada)
   - [Realizando o *Logout*](#realizando-o-logout)
   - [Acessando pelo celular](#acessando-pelo-celular)
-- [Link para o deploy da Plataforma](#link-para-o-deploy-da-plataforma)
 ---
 
 ## Contexto do *Case*
