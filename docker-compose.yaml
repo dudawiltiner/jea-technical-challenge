@@ -1,0 +1,59 @@
+# Definindo a versão do docker-compose que será utilizada
+version: '3.5'
+
+# Definindo os serviços/containers
+services:
+  app:
+    container_name: react-app
+    build: front-end/ # será armazenado em cash
+    volumes: # criar volumes para poder editar códigos
+      - ./front-end:/app
+      - /app/node_modules
+    ports: 
+      - ${APP_PORT}:${APP_PORT} # bind da porta
+    depends_on:
+      - api
+    networks:
+      - network-1
+    env_file:
+      - './front-end/.env'
+
+  api:
+    container_name: node-api
+    build: back-end/ # será armazenado em cash
+    volumes: # criar volumes para poder editar códigos
+      - ./back-end:/api
+      - /api/node_modules
+    ports: 
+      - ${API_PORT}:${API_PORT} # bind da porta
+    depends_on:
+      - db
+    networks:
+      - network-1
+      - network-2
+    env_file:
+      - './back-end/.env'
+    environment:
+    # sobrescrever essas variáveis para conseguirem
+    # se conectar na sua rede virtual isolada
+      DB_HOST: postgres-db # o nome do container do banco de dados
+      DB_PORT: 5432
+
+  db:
+    container_name: postgres-db
+    image: postgres:13
+    ports: 
+      - ${DB_PORT}:5432 # porta obrigatória
+    networks:
+      - network-2
+    env_file:
+      - '.env'
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+networks: # mapear networks para tornar tudo mais seguro
+  network-1:
+  network-2:
+

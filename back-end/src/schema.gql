@@ -1,0 +1,79 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  name: String!
+  password: String!
+  username: String!
+}
+
+type LoginUser {
+  name: String!
+  username: String!
+  token: String!
+}
+
+type FoundProject {
+  id: ID!
+  title: String!
+  zip_code: String!
+  city: String!
+  cost: Int!
+  done: Boolean!
+  deadline: DateTime!
+  username: String!
+  create_at: DateTime!
+  update_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  user(id: String!): User!
+  users: [User!]!
+  project(id: String!): FoundProject!
+  projectsByUser: [FoundProject!]!
+  projects: [FoundProject!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): User!
+  loginUser(username: String!, password: String!): LoginUser!
+  updateUser(id: String!, data: UpdateUserInput!): User!
+  deleteUser(id: String!): Boolean!
+  createProject(data: CreateProjectWithHeaderInput!): FoundProject!
+  updateProject(id: String!, data: UpdateProjectWithHeaderInput!): FoundProject!
+  deleteProject(id: String!): Boolean!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+  username: String!
+}
+
+input UpdateUserInput {
+  name: String
+  password: String
+  username: String
+}
+
+input CreateProjectWithHeaderInput {
+  title: String!
+  zip_code: String!
+  cost: Float!
+  deadline: DateTime!
+}
+
+input UpdateProjectWithHeaderInput {
+  title: String
+  zip_code: String
+  cost: Float
+  done: Boolean
+  deadline: DateTime
+}
