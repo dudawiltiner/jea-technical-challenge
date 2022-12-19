@@ -15,18 +15,10 @@ Esse desafio foi proposto pela time de recrutamento da empresa J&A, em que foram
 - [Entregáveis](#entregáveis)
 - [Uso do projeto localmente](#uso-do-projeto-localmente)
 - [Usando a plataforma](#usando-a-plataforma)
-  - [Primeiro Acesso](#primeiro-acesso)
-  - [Criando uma tarefa](#criando-uma-tarefa)
-  - [Atualizando uma tarefa](#atualizando-uma-tarefa)
-  - [Excluindo uma tarefa](#excluindo-uma-tarefa)
-  - [Ordenando a Lista de Tarefas](#ordenando-a-lista-de-tarefas)
-  - [Filtrar as tarefas](#filtrar-as-tarefas)
-  - [Digitando a URL de forma errada](#digitando-a-url-de-forma-errada)
-  - [Realizando o *Logout*](#realizando-o-logout)
-  - [Acessando pelo celular](#acessando-pelo-celular)
+ 
 ---
 
-## Contexto do *Case*
+## 💻 Contexto do *Case*
 
 *"Nesse desafio, você deverá criar uma aplicação para nos mostrar suas skills e se elas estão de
 acordo com o dia-a-dia do nosso time de desenvolvimento!"*
@@ -36,7 +28,7 @@ password e username, bem como fazer o CRUD de projects"*
 
 Abaixo estão os requisitos técnicos e as funcionalidades que a solução deve possuir:
 
-### Requisitos técnicos
+###  Requisitos técnicos
 
 - [x] Front-End para uso do CRUD dos projetos na área logada;
 - [x] Back-End em NodeJS ou Python com rotas especificadas;
@@ -49,14 +41,14 @@ Abaixo estão os requisitos técnicos e as funcionalidades que a solução deve 
 - [x] Marcar um *projeto* como feito;
 - [x] Excluir um *projeto*;
 
-## Entregáveis
+## 🚀 Entregáveis
 
 A solução do desafio foi separarada em duas partes: front-end e back-end, cada em sua respectiva pasta com as seguintes tecnologias principais:
 
 ### Front-End
 [React](https://reactjs.org/)<br>
 [Typescript](https://www.typescriptlang.org/)<br>
-[ReactHooksForms](hhttps://react-hook-form.com/)<br>
+[ReactHooksForms](https://react-hook-form.com/)<br>
 [MUI](https://mui.com/)<br>
 [Jotai](https://jotai.org/)<br>
 [ReactQuery](https://react-query-v3.tanstack.com/)<br>
@@ -79,7 +71,7 @@ Gostaria de informar que me autodesafiei muito nesse case e quis desenvolve-lo c
 
 ---
 
-## Uso do projeto localmente
+## ⬇️ Uso do projeto localmente
 
 Para facilitar o processo de rodar o projeto localmente. Recomendo seguir o passo a passo descrito a abaixo, após instalar o Docker e Docker Compose em seu notebook usando a própria documentação da ferramenta para o seu sistema operacional, em poucos passos você vai perceber que o projeto estará rodando em seu notebook com poucos comandos. É sensacional! Mas se preferir em cada pasta há um readme gerado pelas ferramentas pricipais que explica como manipular e instalar as dependências de cada pasta.
 
@@ -124,7 +116,7 @@ Vamos lá!
 
 Após cada um dos passos a seguir, haverá um exemplo de como cada página pode ser usada, caso tenha dificuldades e o exemplo não seja suficiente, não hesite em me contatar em _eduardawiltiner@gmail.com_.
 
-### Primeiro Acesso
+### ⚡ Primeiro Acesso
 
 Acessando a plataforma neste [link](http://localhost:3000/), você irá encontrar a tela de **Login**, em que será redirecionado(a) e poderá realizar o cadastro na tela após clicar no link.
 
