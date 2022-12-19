@@ -19,9 +19,7 @@ export default function InputDate({ value, changeValue }: InputDateProps) {
         onChange={(newValue) => {
           changeValue(newValue)
         }}
-        renderInput={(params) => (
-          <TextField sx={{ mt: 3 }} fullWidth {...params} />
-        )}
+        renderInput={(params) => <TextField fullWidth {...params} />}
       />
     </LocalizationProvider>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-export default function InputUsername() {
+export default function InputUsername({ ...props }) {
   return (
     <TextField
       required
@@ -10,6 +10,7 @@ export default function InputUsername() {
       label="Usuário"
       name="username"
       autoComplete="username"
+      {...props}
     />
   )
 }

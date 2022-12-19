@@ -2,8 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Context } from '@nestjs/graphql';
 import { AuthGuard } from 'src/auth.guard';
 import { CreateProjectWithHeaderInput } from './dto/create-project-with-header.input';
-import { CreateProjectInput } from './dto/create-project.input';
-import { UpdateProjectInput } from './dto/update-project.input';
+import { UpdateProjectWithHeaderInput } from './dto/update-project-with-header.input';
 import { ProjectService } from './project.service';
 import { FoundProject } from './project.type';
 
@@ -20,6 +19,15 @@ export class ProjectResolver {
 
   @Query(() => [FoundProject])
   @UseGuards(new AuthGuard())
+  async projectsByUser(@Context() context): Promise<FoundProject[]> {
+    const projects = await this.projectService.findAllProjectsByUser(
+      context.req.headers.username,
+    );
+    return projects;
+  }
+
+  @Query(() => [FoundProject])
+  @UseGuards(new AuthGuard())
   async projects(): Promise<FoundProject[]> {
     const projects = await this.projectService.findAllProjects();
     return projects;
@@ -31,6 +39,7 @@ export class ProjectResolver {
     @Args('data') data: CreateProjectWithHeaderInput,
     @Context() context,
   ): Promise<FoundProject> {
+    console.log(context.req.headers.username);
     const project = await this.projectService.createProject({
       ...data,
       username: context.req.headers.username,
@@ -42,9 +51,13 @@ export class ProjectResolver {
   @UseGuards(new AuthGuard())
   async updateProject(
     @Args('id') id: string,
-    @Args('data') data: UpdateProjectInput,
+    @Args('data') data: UpdateProjectWithHeaderInput,
+    @Context() context,
   ): Promise<FoundProject> {
-    const project = await this.projectService.updateProject(id, data);
+    const project = await this.projectService.updateProject(id, {
+      ...data,
+      username: context.req.headers.username,
+    });
     return project;
   }
 

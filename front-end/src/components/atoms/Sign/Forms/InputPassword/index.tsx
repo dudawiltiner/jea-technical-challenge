@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-export default function InputPassword() {
+export default function InputPassword({ ...props }) {
   return (
     <TextField
       margin="normal"
@@ -12,6 +12,7 @@ export default function InputPassword() {
       type="password"
       id="password"
       autoComplete="current-password"
+      {...props}
     />
   )
 }

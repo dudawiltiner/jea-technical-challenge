@@ -11,7 +11,7 @@ import * as jwt from 'jsonwebtoken';
 import { User } from './user.entity';
 
 const jwtConfig = {
-  expiresIn: '1d',
+  expiresIn: '15m',
   algorithm: 'HS256',
 };
 

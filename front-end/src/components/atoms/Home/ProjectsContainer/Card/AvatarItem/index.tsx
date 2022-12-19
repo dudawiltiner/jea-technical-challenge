@@ -1,14 +1,16 @@
-import { Avatar, ListItemAvatar } from '@mui/material'
+import { ListItem, ListItemAvatar } from '@mui/material'
 import React from 'react'
 
 interface AuxProps {
   children: React.ReactNode
+  text: React.ReactNode
 }
 
-export default function AvatarItem({ children }: AuxProps) {
+export default function AvatarItem({ children, text }: AuxProps) {
   return (
-    <ListItemAvatar>
-      <Avatar sx={{ width: 24, height: 24 }}>{children}</Avatar>
-    </ListItemAvatar>
+    <ListItem sx={{ ml: 0 }}>
+      <ListItemAvatar>{children}</ListItemAvatar>
+      {text}
+    </ListItem>
   )
 }

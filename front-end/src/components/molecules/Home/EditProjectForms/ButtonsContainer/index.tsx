@@ -1,9 +1,11 @@
 import { DialogActions } from '@mui/material'
+import { useAtom } from 'jotai'
 import React from 'react'
+import { openEditioModal } from '../../../../../store'
 import { ButtonCancel, ButtonSave } from '../../../../atoms/Home/Forms'
 
 export default function ButtonsContainer() {
-  const [, setOpen] = React.useState(false)
+  const [, setOpen] = useAtom(openEditioModal)
 
   const handleClose = () => {
     setOpen(false)
@@ -11,7 +13,7 @@ export default function ButtonsContainer() {
   return (
     <DialogActions>
       <ButtonCancel handleClose={handleClose}>Cancel</ButtonCancel>
-      <ButtonSave handleClose={handleClose}>Salvar</ButtonSave>
+      <ButtonSave>Salvar</ButtonSave>
     </DialogActions>
   )
 }

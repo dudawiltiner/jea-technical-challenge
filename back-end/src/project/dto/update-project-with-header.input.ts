@@ -1,8 +1,9 @@
 import { InputType } from '@nestjs/graphql';
 import {
+  IsBoolean,
   IsDate,
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   Matches,
@@ -20,10 +21,15 @@ export class UpdateProjectWithHeaderInput {
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   zip_code?: string;
 
-  @IsNumber()
+  @IsInt()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   @IsOptional()
   cost?: number;
+
+  @IsBoolean()
+  @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
+  @IsOptional()
+  done?: boolean;
 
   @IsDate()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })

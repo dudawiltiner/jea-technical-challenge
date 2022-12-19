@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-export default function InputName() {
+export default function InputName({ ...props }) {
   return (
     <TextField
       margin="normal"
@@ -12,6 +12,7 @@ export default function InputName() {
       name="name"
       autoComplete="name"
       autoFocus
+      {...props}
     />
   )
 }

@@ -20,7 +20,7 @@ type FoundProject {
   title: String!
   zip_code: String!
   city: String!
-  cost: Float!
+  cost: Int!
   done: Boolean!
   deadline: DateTime!
   username: String!
@@ -37,6 +37,7 @@ type Query {
   user(id: String!): User!
   users: [User!]!
   project(id: String!): FoundProject!
+  projectsByUser: [FoundProject!]!
   projects: [FoundProject!]!
 }
 
@@ -46,7 +47,7 @@ type Mutation {
   updateUser(id: String!, data: UpdateUserInput!): User!
   deleteUser(id: String!): Boolean!
   createProject(data: CreateProjectWithHeaderInput!): FoundProject!
-  updateProject(id: String!, data: UpdateProjectInput!): FoundProject!
+  updateProject(id: String!, data: UpdateProjectWithHeaderInput!): FoundProject!
   deleteProject(id: String!): Boolean!
 }
 
@@ -69,10 +70,10 @@ input CreateProjectWithHeaderInput {
   deadline: DateTime!
 }
 
-input UpdateProjectInput {
+input UpdateProjectWithHeaderInput {
   title: String
   zip_code: String
   cost: Float
+  done: Boolean
   deadline: DateTime
-  username: String
 }

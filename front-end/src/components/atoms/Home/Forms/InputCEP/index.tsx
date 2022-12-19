@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-export default function InputCEP() {
+export default function InputCEP({ ...props }) {
   return (
     <TextField
       margin="normal"
@@ -12,6 +12,7 @@ export default function InputCEP() {
       type="text"
       id="cep"
       autoComplete="current-password"
+      {...props}
     />
   )
 }

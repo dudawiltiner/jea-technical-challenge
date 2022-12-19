@@ -1,13 +1,15 @@
 import React from 'react'
 import { Image, Title } from '../../../atoms/Menu/Logo'
 
-export default function Logo() {
+interface LogoProps {
+  isMobile: boolean
+}
+
+export default function Logo({ isMobile }: LogoProps) {
   return (
-    <div>
-      <Image />
-      <Title>
-        MOON
-      </Title>
-    </div>
+    <>
+      <Image isMobile={isMobile} />
+      <Title isMobile={isMobile}>MOON</Title>
+    </>
   )
 }

@@ -3,12 +3,11 @@ import Button from '@mui/material/Button'
 
 interface ButtonSaveProps {
   children: React.ReactNode
-  handleClose: () => void
 }
 
-export default function ButtonSave({ children, handleClose }: ButtonSaveProps) {
+export default function ButtonSave({ children }: ButtonSaveProps) {
   return (
-    <Button onClick={handleClose} color="secondary" variant="contained">
+    <Button type="submit" color="secondary" variant="contained">
       {children}
     </Button>
   )

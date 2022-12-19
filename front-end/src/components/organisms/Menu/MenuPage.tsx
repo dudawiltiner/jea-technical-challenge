@@ -6,35 +6,40 @@ import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import { FormControlLabel, styled, Switch } from '@mui/material'
 import { useAtom } from 'jotai'
 import { isDarkModeAt } from '../../../store'
-import { Icon, Logo, Pages, Settings } from '../../molecules/Menu'
+import { Icon, Logo, Pages } from '../../molecules/Menu'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
-const pages = ['Projetos', 'Sair']
+const pages = ['Sair']
 
 function MenuPage() {
+  const location = useLocation()
+  const [cookies,, removeCookie] = useCookies()
   const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAt)
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  )
+  const [show, setShow] = React.useState(true)
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
 
   const handleCloseNavMenu = () => {
+    removeCookie('username')
+    removeCookie('token')
     setAnchorElNav(null)
+    navigate('/login')
   }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+  React.useEffect(() => {
+    if (['/cadastro', '/login'].includes(location.pathname)) {
+      setShow(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -87,25 +92,31 @@ function MenuPage() {
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Logo />
+          <Logo isMobile={false} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <Icon handleOpenNavMenu={handleOpenNavMenu} />
-            <Pages anchorElNav={anchorElNav} handleCloseNavMenu={handleCloseNavMenu} />
+            {show && (
+              <>
+                <Icon handleOpenNavMenu={handleOpenNavMenu} />
+                <Pages
+                  anchorElNav={anchorElNav}
+                  handleCloseNavMenu={handleCloseNavMenu}
+                />
+              </>
+            )}
           </Box>
 
-          <Logo />
-
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            {show &&
+              pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -114,12 +125,10 @@ function MenuPage() {
               control={<MaterialUISwitch sx={{ m: 1 }} checked={isDarkMode} />}
               label=""
             />
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Settings anchorElUser={anchorElUser} handleCloseUserMenu={ handleCloseUserMenu } />
+
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt={cookies.username} src="/static/images/avatar/2.jpg" />
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

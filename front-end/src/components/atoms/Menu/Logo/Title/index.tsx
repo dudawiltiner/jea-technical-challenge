@@ -3,9 +3,10 @@ import React from 'react'
 
 interface AuxProps {
   children: React.ReactNode
+  isMobile: boolean
 }
 
-export default function Title({ children }: AuxProps) {
+export default function Title({ children, isMobile }: AuxProps) {
   return (
     <Typography
       variant="h6"
@@ -14,7 +15,10 @@ export default function Title({ children }: AuxProps) {
       href="/"
       sx={{
         mr: 2,
-        display: { xs: 'none', md: 'flex' },
+        display: {
+          xs: `${isMobile ? 'flex' : 'none'}`,
+          md: `${isMobile ? 'none' : 'flex'}`
+        },
         fontFamily: 'monospace',
         fontWeight: 700,
         letterSpacing: '.3rem',
@@ -22,7 +26,7 @@ export default function Title({ children }: AuxProps) {
         textDecoration: 'none'
       }}
     >
-      { children }
+      {children}
     </Typography>
   )
 }

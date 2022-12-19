@@ -16,7 +16,7 @@ export default function IconMenu({ children, handleOpenNavMenu }: AuxProps) {
       onClick={handleOpenNavMenu}
       color="inherit"
     >
-      { children }
+      {children}
     </IconButton>
   )
 }

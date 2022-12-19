@@ -4,13 +4,20 @@ import { FilterAlt } from '@mui/icons-material'
 
 interface ButtonAllProjectsProps {
   children: React.ReactNode
+  onClick: () => void
 }
 
 export default function ButtonAllProjects({
-  children
+  children,
+  onClick
 }: ButtonAllProjectsProps) {
   return (
-    <Button startIcon={<FilterAlt />} color="secondary" variant="contained">
+    <Button
+      onClick={onClick}
+      startIcon={<FilterAlt />}
+      color="primary"
+      variant="outlined"
+    >
       {children}
     </Button>
   )

@@ -7,9 +7,9 @@ interface AuxProps {
 }
 
 export default function Item({ children, handleClose }: AuxProps) {
-  return ( 
-  <MenuItem onClick={handleClose}>
-    <Typography textAlign="center">{children}</Typography>
-  </MenuItem>
+  return (
+    <MenuItem onClick={handleClose}>
+      <Typography textAlign="center">{children}</Typography>
+    </MenuItem>
   )
 }

@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class FoundProject {
@@ -14,7 +14,7 @@ export class FoundProject {
   @Field(() => String)
   city: string;
 
-  @Field(() => Number)
+  @Field(() => Int)
   cost: number;
 
   @Field(() => Boolean)

@@ -22,7 +22,22 @@ export class ProjectService {
     const projects = await this.projectRepository.find();
     const list = [];
     let count = 0;
-    while (count <= 3) {
+    while (count < projects.length) {
+      const project = projects[count];
+      const adress = await fetchFindCep(project.zip_code);
+      const newProject = { ...project, city: `${adress.city}/${adress.state}` };
+      list.push(newProject);
+      count += 1;
+    }
+
+    return list;
+  }
+
+  async findAllProjectsByUser(username: string): Promise<FoundProject[]> {
+    const projects = await this.projectRepository.findBy({ username });
+    const list = [];
+    let count = 0;
+    while (count < projects.length) {
       const project = projects[count];
       const adress = await fetchFindCep(project.zip_code);
       const newProject = { ...project, city: `${adress.city}/${adress.state}` };
@@ -53,6 +68,7 @@ export class ProjectService {
     if (existedProject) {
       throw new InternalServerErrorException('Projeto já existe');
     }
+    const adress = await fetchFindCep(data.zip_code);
 
     const project = this.projectRepository.create(data);
     const projectSaved = await this.projectRepository.save(project);
@@ -61,7 +77,6 @@ export class ProjectService {
       throw new InternalServerErrorException('Problema para criar um projeto');
     }
 
-    const adress = await fetchFindCep(project.zip_code);
     const newProject = {
       ...projectSaved,
       city: `${adress.city}/${adress.state}`,
@@ -73,16 +88,16 @@ export class ProjectService {
     id: string,
     data: UpdateProjectInput,
   ): Promise<FoundProject> {
-    const project = await this.findProjectById(id);
+    const project = await this.projectRepository.findOneBy({ id });
+    const adress = await fetchFindCep(data.zip_code);
 
-    await this.projectRepository.update(project, { ...data });
+    await this.projectRepository.update({ id: project.id }, data);
     // gerar um valor que pode ser retornado
     const projectUpdated = this.projectRepository.create({
       ...project,
       ...data,
     });
 
-    const adress = await fetchFindCep(project.zip_code);
     const newProject = {
       ...projectUpdated,
       city: `${adress.city}/${adress.state}`,

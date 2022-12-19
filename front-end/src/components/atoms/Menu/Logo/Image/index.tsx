@@ -1,8 +1,18 @@
 import { Cookie } from '@mui/icons-material'
 import React from 'react'
 
-export default function Image() {
+interface LogoProps {
+  isMobile: boolean
+}
+
+export default function Image({ isMobile }: LogoProps) {
   return (
-    <Cookie sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+    <Cookie
+      sx={{
+        xs: `${isMobile ? 'flex' : 'none'}`,
+        md: `${isMobile ? 'none' : 'flex'}`,
+        mr: 1
+      }}
+    />
   )
 }

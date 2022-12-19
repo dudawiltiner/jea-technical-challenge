@@ -1,17 +1,17 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-export default function InputName() {
+export default function InputName({ ...props }) {
   return (
     <TextField
-      margin="normal"
+      autoComplete="given-name"
+      name="name"
       required
       fullWidth
       id="name"
-      label="Usuário"
-      name="name"
-      autoComplete="name"
+      label="Nome"
       autoFocus
+      {...props}
     />
   )
 }

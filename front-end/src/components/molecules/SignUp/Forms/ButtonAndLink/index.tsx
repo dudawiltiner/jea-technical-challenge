@@ -8,7 +8,9 @@ export default function ButtonAndLink() {
       <ButtonSubmit>CADASTRAR</ButtonSubmit>
       <Grid container justifyContent="flex-end">
         <Grid item>
-          <LinkForm>{'Já possui uma conta? Realize o seu login'}</LinkForm>
+          <LinkForm link="/login">
+            {'Já possui uma conta? Realize o seu login'}
+          </LinkForm>
         </Grid>
       </Grid>
     </div>

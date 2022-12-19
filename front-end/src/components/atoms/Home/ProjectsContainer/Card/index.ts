@@ -1,7 +1,7 @@
 import AvatarItem from './AvatarItem'
-import ButtonEdit from './ButtonEdit'
+import ButtonModel from './ButtonModel'
 import CheckProject from './CheckProject'
 import TextItem from './TextItem'
 import Title from './Title'
 
-export { AvatarItem, ButtonEdit, CheckProject, TextItem, Title }
+export { AvatarItem, ButtonModel, CheckProject, TextItem, Title }

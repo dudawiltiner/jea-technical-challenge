@@ -13,6 +13,8 @@ services:
       - ${APP_PORT}:${APP_PORT} # bind da porta
     depends_on:
       - api
+    networks:
+      - network-1
     env_file:
       - './front-end/.env'
 
@@ -26,6 +28,9 @@ services:
       - ${API_PORT}:${API_PORT} # bind da porta
     depends_on:
       - db
+    networks:
+      - network-1
+      - network-2
     env_file:
       - './back-end/.env'
     environment:
@@ -39,11 +44,16 @@ services:
     image: postgres:13
     ports: 
       - ${DB_PORT}:5432 # porta obrigatória
+    networks:
+      - network-2
     env_file:
       - '.env'
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-  
+
+networks: # mapear networks para tornar tudo mais seguro
+  network-1:
+  network-2:
 

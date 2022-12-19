@@ -1,11 +1,5 @@
 import { InputType } from '@nestjs/graphql';
-import {
-  IsDate,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  Matches,
-} from 'class-validator';
+import { IsDate, IsInt, IsNotEmpty, IsString, Matches } from 'class-validator';
 
 @InputType()
 export class CreateProjectInput {
@@ -18,7 +12,7 @@ export class CreateProjectInput {
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   zip_code: string;
 
-  @IsNumber()
+  @IsInt()
   @IsNotEmpty({ message: 'Este campo não pode ser vazio' })
   cost: number;
 

@@ -1,13 +1,11 @@
 import React from 'react'
-import SignIn from './components/SignIn'
-import SignUp from './components/SignUp'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CssBaseline, PaletteMode } from '@mui/material'
-import MenuBar from './components/Menu'
 import { useAtom } from 'jotai'
 import { isDarkModeAt } from './store'
-import ProjectsManage from './components/ProjectsManage'
-import Error from './components/404'
+import AppRoutes from './AppRoutes'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { CookiesProvider } from 'react-cookie'
 
 export const themeOptions = (isDarkMode: boolean) => {
   return {
@@ -23,15 +21,21 @@ export const themeOptions = (isDarkMode: boolean) => {
   }
 }
 
+const client = new QueryClient();
+
 function AppRender() {
   const [isDarkMode] = useAtom(isDarkModeAt)
   const theme = createTheme(themeOptions(isDarkMode))
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Error />
-    </ThemeProvider>
+    <QueryClientProvider client={client}>
+      <CookiesProvider>
+        <ThemeProvider theme={theme}>
+          <AppRoutes />
+          <CssBaseline />
+        </ThemeProvider>
+      </CookiesProvider>
+    </QueryClientProvider>
   )
 }
 
