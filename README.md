@@ -24,7 +24,6 @@ Esse desafio foi proposto pela time de recrutamento da empresa J&A, em que foram
   - [Digitando a URL de forma errada](#digitando-a-url-de-forma-errada)
   - [Realizando o *Logout*](#realizando-o-logout)
   - [Acessando pelo celular](#acessando-pelo-celular)
-- [Link para o deploy da Plataforma](#link-para-o-deploy-da-plataforma)
 ---
 
 ## Contexto do *Case*
@@ -330,8 +329,4 @@ A plataforma não possui uma versão *mobile*, logo se você tentar usar pelo ce
   <img src="./gifs/nomobile.gif" margin="10px" width="700" alt="sem versão mobile" />
 </div>
 
-## Link para o deploy da Plataforma:
-https://desafioebytr.vercel.app/
-
-OBS:Lembrando que para acessar a plataforma deve possuir um cadastro no banco de dados.
 
