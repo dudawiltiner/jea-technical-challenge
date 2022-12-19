@@ -56,16 +56,16 @@ A solução do desafio foi separarada em duas partes: front-end e back-end, cada
 - Front-End
 [React](https://reactjs.org/)<br>
 [Typescript](https://www.typescriptlang.org/)<br>
-[React Hooks Forms](hhttps://react-hook-form.com/)<br>
+[ReactHooksForms](hhttps://react-hook-form.com/)<br>
 [MUI](https://mui.com/)<br>
 [Jotai](https://jotai.org/)<br>
-[React Query](https://react-query-v3.tanstack.com/)<br>
+[ReactQuery](https://react-query-v3.tanstack.com/)<br>
 
 - Back-End
 [Nest](https://nestjs.com/)<br>
 [Nodejs](https://nodejs.org/)<br>
 [JWT](https://jwt.io/)<br>
-[Class Validator](https://github.com/typestack/class-validator)<br>
+[ClassValidator](https://github.com/typestack/class-validator)<br>
 [GraphQL](https://graphql.org/)<br>
 
 - Banco de Dados
@@ -75,7 +75,7 @@ A solução do desafio foi separarada em duas partes: front-end e back-end, cada
 [Docker](https://www.docker.com/)<br>
 
 
-Gostaria de informar que me autodesafiei muito nesse desafio e quis desenvolve-lo com tecnologias em alta no mercado, as quais eu nunca tinha trabalhado antes como: Postgre, GraphQL, Rect Hooks Forms, Nestjs e Docker. Por estar atuando a muitos meses no front-end imaginei que iria sentir muita dificuldade na instalação, configuraçao e manipulação do Postgre, um SGBD que nunca havia trabalhado, mas utilizando o Docker consegui criar uma ambiente com tudo que eu precisava sem se quer ter que fazer as configurações manuais que levam tempo para os desenvolvedores inciarem de fato a programação dos seu apps no projeto. Acredito que o ponto alto foi de fato o Docker. Além de claro, o GraphQL que me ajudou a criar com um único end-point a API com tudo que eu precisava. 
+Gostaria de informar que me autodesafiei muito nesse case e quis desenvolve-lo com tecnologias em alta no mercado, algumas que até eu nunca tinha trabalhado antes como: Postgre, GraphQL, Rect Hooks Forms, Nestjs e Docker. Por estar atuando a muitos meses no front-end imaginei que iria sentir muita dificuldade na instalação, configuraçao e manipulação do Postgre, um SGBD que nunca havia trabalhado, mas utilizando o Docker consegui criar uma ambiente com tudo que eu precisava sem se quer ter que fazer as configurações manuais que levam tempo para os desenvolvedores inciarem de fato a programação dos seu apps no projeto. Acredito que o ponto alto foi de fato o Docker. Além de claro, o GraphQL que me ajudou a criar com um único end-point a API com tudo que eu precisava. 
 
 ---
 
@@ -126,7 +126,7 @@ Após cada um dos passos a seguir, haverá um exemplo de como cada página pode 
 
 ### Primeiro Acesso
 
-Acessando a plataforma neste [link](http://localhost:3000/) , você irá encontrar a tela de **Login**, 
+Acessando a plataforma neste [link](http://localhost:3000/), você irá encontrar a tela de **Login**, em que será redirecionado(a) e poderá realizar o cadastro na tela após clicar no link.
 
 <div align="center">
   <img src="./gifs/login.gif" margin="10px" width="700" alt="login"/>
@@ -137,7 +137,7 @@ Acessando a plataforma neste [link](http://localhost:3000/) , você irá encontr
 Será onde você deverá se autenticar para ter acesso ao acompanhamento dos projetos na página **Home**. Sem a autenticação você não terá acesso a Home, mas quando autenticado(a) você não terá que fazer o *login* novamente quando fechar a página e abri-la depois durante 15 minutos, por conta do uso do JWT e cookies configurados.
 
 <div align="center">
-  <img src="./gifs/login.gif" margin="10px" width="700" alt="login"/>
+  <img src="./gifs/validacaoelogin.gif" margin="10px" width="700" alt="login"/>
 </div>
 
 ### Criando um projeto
@@ -145,7 +145,7 @@ Será onde você deverá se autenticar para ter acesso ao acompanhamento dos pro
 Para criar uma tarefa, você deve apenas clicar no "+" do botão flutuante. Uma data de prazo já estará configurada para o mesmo dia de criação da tarefa, mas você pode modificá-la. Que tal colocar um darkmode?!
 
 <div align="center">
-  <img src="./gifs/createTask.gif" margin="10px" width="700" alt="criando uma tarefa"/>
+  <img src="./gifs/darkmodeecriacaodeprojeto.gif" margin="10px" width="700" alt="criando uma tarefa"/>
 </div>
 
 ### Atualizando um projeto
@@ -153,16 +153,15 @@ Para criar uma tarefa, você deve apenas clicar no "+" do botão flutuante. Uma 
 Para atualizar um projeto, você deve apenas clicar no símbolo de edição no card de cada projeto. E você pode também excluir ou clicar no check para mudar o status para *done*.
 
 <div align="center">
-  <img src="./gifs/updateTask.gif" margin="10px" width="700" alt="atualizando uma tarefa"/>
+  <img src="./gifs/edicao.gif" margin="10px" width="700" alt="atualizando uma tarefa"/>
 </div>
-
 
 ### Filtrar os projetos
 
 Você pode filtrar os projetos para aparecer apenas os que estão sob a sua responsabilidade.
 
 <div align="center">
-  <img src="./gifs/filter.gif" margin="10px" width="700" alt="filtro de tarefas"/>
+  <img src="./gifs/filtro.gif" margin="10px" width="700" alt="filtro de tarefas"/>
 </div>
 
 ### Realizando o *Logout* e Digitando a URL de forma errada
@@ -170,7 +169,7 @@ Você pode filtrar os projetos para aparecer apenas os que estão sob a sua resp
 Para se desconectar da sua conta, só é necessário clicar em seu nome no NavBar e, em seguida, clicar em "Sair". Ao digitar a URL do site de forma errada, não se preocupe, vai paracer a página de erro 404 que vai te ajudar a voltar a **Home**.
 
 <div align="center">
-  <img src="./gifs/404.gif" margin="10px" width="700" alt="erro 404"/>
+  <img src="./gifs/logouteerro404.gif" margin="10px" width="700" alt="erro 404"/>
 </div>
 
 ### Documentação da API
@@ -178,5 +177,5 @@ Para se desconectar da sua conta, só é necessário clicar em seu nome no NavBa
 Com o GraphQl temos como testar e olhar a documentação *playground* da ferramenta. Isso facilita com os testes e na tipagem acessando o seguinte [link](http://localhost:3001/graphql).
 
 <div align="center">
-  <img src="./gifs/404.gif" margin="10px" width="700" alt="erro 404"/>
+  <img src="./gifs/playground.gif" margin="10px" width="700" alt="erro 404"/>
 </div>
