@@ -97,17 +97,32 @@ Vamos lá!
   cd jea-technical-challenge
 ```
 
-4. Garanta de remover todas os containers, volumes e imagens que você possui.
+4. Crie um arquivo .env na raiz do projeto e em cada pasta (front-end e back-end) com essas variáveis de ambiente.
+```javascript
+  API_PORT=3001
+  
+  APP_PORT=3000
+  APP_ENDPOINT=http://localhost:3001/graphql
+
+  DB_HOST=localhost
+  DB_PORT=5435
+  DB_USERNAME=eduarda
+  DB_PASSWORD=dbpass
+  DB_NAME=project
+  DB_SYNC=true #sincronização para desenvolvimento
+```
+
+5. Garanta de remover todas os containers, volumes e imagens que você possui.
 ```javascript
    docker-compose down -v --rmi all
 ```
 
-5. Limpar tudo que ainda tiver.
+6. Limpar tudo que ainda tiver.
 ```javascript
    docker system prune -af
 ```
 
-6. Instale todas as dependências e rode a aplicação, usando o CLI **docker-compose**.
+7. Instale todas as dependências e rode a aplicação, usando o CLI **docker-compose**.
 ```javascript
    docker-compose up --build
 ```
